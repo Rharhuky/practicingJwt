@@ -1,0 +1,13 @@
+server:
+  port: ${SERVER_PORT:8081}
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/practice
+    username: postgres
+    password: 1234
+    driverClassName: org.postgresql.Driver
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
