@@ -4,15 +4,15 @@ spring:
   datasource:
     url: jdbc:postgresql://localhost:5432/practice
     username: postgres
-    password: 1234
+    password: pst21
     driverClassName: org.postgresql.Driver
   jpa:
     show-sql: true
     hibernate:
       ddl-auto: update
     database-platform: org.hibernate.dialect.PostgreSQLDialect
-  security:
-    user:
-      name: rharhuky
-      password: rharhuky
-      roles: ADMIN
+#  security:
+#    user:
+#      name: rharhuky
+#      password: rharhuky
+#      roles: ADMIN
