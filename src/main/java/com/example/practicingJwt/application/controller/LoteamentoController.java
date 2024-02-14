@@ -3,8 +3,10 @@ package com.example.practicingJwt.application.controller;
 import com.example.practicingJwt.application.repository.LoteamentoRepository;
 import com.example.practicingJwt.model.Loteamento;
 import com.example.practicingJwt.model.LoteamentoRequest;
+import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.BeanUtils;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -21,6 +23,7 @@ public class LoteamentoController {
         return this.loteamentoRepository.findAll();
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @PostMapping
     public Loteamento create(@RequestBody LoteamentoRequest loteamentoRequest){
         var newLoteamento = new Loteamento();

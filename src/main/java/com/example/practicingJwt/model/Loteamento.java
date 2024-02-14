@@ -22,7 +22,7 @@ public class Loteamento extends BaseEntity<Long>{
 
     private String nome;
 
-//    @Cep custom annotation TODO
+//    @Cep custom annotation TODO - custom annotation
     private String endereco;
 
     @JsonManagedReference
