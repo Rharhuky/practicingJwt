@@ -11,14 +11,9 @@ spring:
     hibernate:
       ddl-auto: update
     database-platform: org.hibernate.dialect.PostgreSQLDialect
-#  security:
-#    user:
-#      name: rharhuky
-#      password: rharhuky
-#      roles: ADMIN
 
 app:
   jwt:
     secret: ${APP_JWT_SECRET:B6BE2A94E42DFC80FDE81FA5956B6F7B438702C38DFD51DA8B35BB867A76BB73}
     expiration:
-      milliseconds: 180000
+      milliseconds: ${APP_JWT_EXPIRATION_MILLISECONDS:180000}
