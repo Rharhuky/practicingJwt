@@ -5,7 +5,7 @@ import com.example.practicingJwt.model.payload.RegisterRequest;
 
 public interface AuthService {
 
-    String log(LoginRequest loginRequest);
+    String login(LoginRequest loginRequest);
 
     String register(RegisterRequest request);
 

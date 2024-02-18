@@ -28,7 +28,7 @@ public class AuthServiceimpl implements AuthService {
     private List<UserRegisterValidation> userRegisterValidationList;
 
     @Override
-    public String log(LoginRequest loginRequest) {
+    public String login(LoginRequest loginRequest) {
         var auth = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(loginRequest.getUserNameOrEmail(), loginRequest.getPassword()));
         SecurityContextHolder.getContext().setAuthentication(auth);
 
