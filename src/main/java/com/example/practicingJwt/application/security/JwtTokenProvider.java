@@ -18,12 +18,12 @@ import java.util.Date;
 public class JwtTokenProvider {
     @Value("${app.jwt.secret}")
     private String jwtSecret;
-    @Value("app.jwt.expiration.milliseconds")
+    @Value("${app.jwt.expiration.milliseconds}")
     private long jwtExpirationDate;
 
     public String generateToken(Authentication authentication){
-        String username = authentication.getName();
 
+        String username = authentication.getName();
         Date theCurrentDate = new Date();
         Date expireDate = new Date(theCurrentDate.getTime() + jwtExpirationDate);
 
@@ -32,11 +32,8 @@ public class JwtTokenProvider {
                 .expiration(expireDate)
                 .signWith(generateKey())
                 .compact();
-
         return theToken;
     }
-
-    // get Username from JWT token
 
     public String getUsername(String token){
 
@@ -56,14 +53,18 @@ public class JwtTokenProvider {
                     .parse(token);
             return true;
         }
-        catch (MalformedJwtException | IllegalArgumentException |ExpiredJwtException malformedJwtException){
+        catch (MalformedJwtException  malformedJwtException){
             throw new RuntimeException();
-
+        }
+        catch (IllegalArgumentException illegalArgumentException){
+            throw new RuntimeException();
+        }
+        catch (ExpiredJwtException expiredJwtException){
+            throw new RuntimeException();
         }
         catch (UnsupportedJwtException unsupportedJwtException){
             throw new RuntimeException();
         }
-
     }
 
     private Key generateKey(){

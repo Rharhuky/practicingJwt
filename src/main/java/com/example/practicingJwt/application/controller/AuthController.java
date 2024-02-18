@@ -1,6 +1,7 @@
 package com.example.practicingJwt.application.controller;
 
 import com.example.practicingJwt.application.service.AuthService;
+import com.example.practicingJwt.model.payload.JwtAuthResponse;
 import com.example.practicingJwt.model.payload.LoginRequest;
 import com.example.practicingJwt.model.payload.RegisterRequest;
 import lombok.AllArgsConstructor;
@@ -16,9 +17,11 @@ public class AuthController {
     private AuthService authService;
 
     @PostMapping(value = {"/login", "/signin"})
-    public ResponseEntity<String> login(@RequestBody LoginRequest loginRequest){
-        var response = authService.login(loginRequest);
-        return new ResponseEntity<>(response, HttpStatus.OK);
+    public ResponseEntity<JwtAuthResponse> login(@RequestBody LoginRequest loginRequest){
+        var token = authService.login(loginRequest);
+        JwtAuthResponse jwtAuthResponse = new JwtAuthResponse();
+        jwtAuthResponse.setAccessToken(token);
+        return new ResponseEntity<>(jwtAuthResponse, HttpStatus.OK);
     }
 
 

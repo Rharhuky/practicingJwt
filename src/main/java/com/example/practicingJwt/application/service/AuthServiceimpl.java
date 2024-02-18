@@ -4,6 +4,7 @@ import com.example.practicingJwt.application.authentication.Role;
 import com.example.practicingJwt.application.authentication.User;
 import com.example.practicingJwt.application.repository.RoleRepository;
 import com.example.practicingJwt.application.repository.UserRepository;
+import com.example.practicingJwt.application.security.JwtTokenProvider;
 import com.example.practicingJwt.model.payload.LoginRequest;
 import com.example.practicingJwt.model.payload.RegisterRequest;
 import lombok.AllArgsConstructor;
@@ -26,13 +27,16 @@ public class AuthServiceimpl implements AuthService {
     private PasswordEncoder passwordEncoder;
     private RoleRepository roleRepository;
     private List<UserRegisterValidation> userRegisterValidationList;
+    private JwtTokenProvider jwtTokenProvider;
 
     @Override
     public String login(LoginRequest loginRequest) {
         var auth = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(loginRequest.getUserNameOrEmail(), loginRequest.getPassword()));
+
         SecurityContextHolder.getContext().setAuthentication(auth);
 
-        return "Logged-in !";
+        return jwtTokenProvider.generateToken(auth);
+
     }
 
     @Override
